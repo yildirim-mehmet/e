@@ -1,0 +1,87 @@
+﻿@model EgitimKayit.ViewModels.EgitilenViewModel
+
+@{
+    ViewData["Title"] = "Personel Ekle";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Eğitim Programına Personel Ekle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="EgtProgId" />
+
+                        <div class="mb-3">
+                            <label asp-for="PerTc" class="form-label"></label>
+                            <select asp-for="PerTc" class="form-select" required>
+                                <option value="">Personel Seçiniz...</option>
+                                @foreach (var personel in Model.Personeller ?? new List<Personel>())
+                                {
+                                    <option value="@personel.Tc">
+                                        @personel.Tc - @personel.Adlar
+                                        @if (!string.IsNullOrEmpty(personel.Birim1))
+                                        {
+                                            <text>(@personel.Birim1)</text>
+                                        }
+                                    </option>
+                                }
+                            </select>
+                            <span asp-validation-for="PerTc" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Dk" class="form-label"></label>
+                                <input asp-for="Dk" type="number" class="form-control" min="0" max="1000" />
+                                <span asp-validation-for="Dk" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Durum</label>
+                                <input type="text" class="form-control" value="Devam Ediyor" readonly />
+                                <small class="form-text text-muted">Varsayılan olarak 'Devam Ediyor' olarak ayarlanır</small>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="BasTar" class="form-label"></label>
+                                <input asp-for="BasTar" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="BasTar" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="BitTar" class="form-label"></label>
+                                <input asp-for="BitTar" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="BitTar" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Aciklama" class="form-label"></label>
+                            <textarea asp-for="Aciklama" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Aciklama" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-person-plus"></i> Personel Ekle
+                            </button>
+                            <a href="@Url.Action("Index", new { egitimProgramId = Model.EgtProgId })"
+                               class="btn btn-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

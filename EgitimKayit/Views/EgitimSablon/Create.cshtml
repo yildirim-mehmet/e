@@ -1,0 +1,126 @@
+﻿@model EgitimKayit.ViewModels.EgitimSablonViewModel
+
+@{
+    ViewData["Title"] = "Yeni Eğitim Şablonu";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYetkili = currentUserTip == "talepci" || currentUserTip == "ogretmen" ||
+                   currentUserTip == "sorumlu" || currentUserTip == "yonetici";
+}
+
+@if (!isYetkili)
+{
+    <div class="alert alert-danger">
+        Bu işlem için yetkiniz yok.
+    </div>
+    return;
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Yeni Eğitim Şablonu Oluştur</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Mesajlar -->
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
+
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Ad" class="form-label"></label>
+                                <input asp-for="Ad" class="form-control" />
+                                <span asp-validation-for="Ad" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="DerId" class="form-label"></label>
+                                <select asp-for="DerId" class="form-select" id="dershaneSelect">
+                                    <option value="">Dershane Seçiniz</option>
+                                    @foreach (var dershane in Model.Dershaneler ?? new List<Dershane>())
+                                    {
+                                        <option value="@dershane.Id">@dershane.Ad</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="DerId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EtId" class="form-label"></label>
+                                <select asp-for="EtId" class="form-select" id="egitimTipSelect">
+                                    <option value="">Önce Dershane Seçiniz</option>
+                                </select>
+                                <span asp-validation-for="EtId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Aciklama" class="form-label"></label>
+                                <textarea asp-for="Aciklama" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="Aciklama" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Oluştur</button>
+                                <a href="@Url.Action("Index")" class="btn btn-secondary">İptal</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Dershane seçildiğinde eğitim tiplerini yükle
+            $('#dershaneSelect').change(function() {
+                var dershaneId = $(this).val();
+                var egitimTipSelect = $('#egitimTipSelect');
+
+                egitimTipSelect.empty();
+
+                if (dershaneId) {
+                    egitimTipSelect.append('<option value="">Yükleniyor...</option>');
+
+                    $.getJSON('@Url.Action("GetEgitimTipleriByDershane", "EgitimSablon")', { dershaneId: dershaneId })
+                        .done(function(data) {
+                            egitimTipSelect.empty();
+                            egitimTipSelect.append('<option value="">Eğitim Tipi Seçiniz</option>');
+
+                            $.each(data, function(index, item) {
+                                egitimTipSelect.append($('<option>', {
+                                    value: item.id,
+                                    text: item.ad
+                                }));
+                            });
+                        })
+                        .fail(function() {
+                            egitimTipSelect.empty();
+                            egitimTipSelect.append('<option value="">Yükleme hatası</option>');
+                        });
+                } else {
+                    egitimTipSelect.append('<option value="">Önce Dershane Seçiniz</option>');
+                }
+            });
+        });
+    </script>
+}

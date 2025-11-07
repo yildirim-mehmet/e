@@ -1,0 +1,107 @@
+﻿@model IEnumerable<EgitimKayit.Models.Dershane>
+
+@{
+    ViewData["Title"] = "Dershane Yönetimi";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYonetici = currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Dershane Yönetimi</h2>
+        @if (isYonetici)
+        {
+            <a href="@Url.Action("Create", "Dershane")" class="btn btn-primary">
+                <i class="bi bi-building-add"></i> Yeni Dershane
+            </a>
+        }
+    </div>
+
+    <!-- Mesajlar -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Dershane Listesi -->
+    <div class="card">
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Henüz dershane bulunmamaktadır.</p>
+                    @if (isYonetici)
+                    {
+                        <a href="@Url.Action("Create", "Dershane")" class="btn btn-primary">İlk Dershaneyi Oluştur</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Dershane Adı</th>
+                                <th>Açıklama</th>
+                                <th>Eğitim Tip Sayısı</th>
+                                <th>Oluşturan</th>
+                                <th>Oluşturma Tarihi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var dershane in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@dershane.Ad</strong>
+                                    </td>
+                                    <td>@dershane.Aciklama</td>
+                                    <td>
+                                        <span class="badge bg-info">@dershane.EgitimTipleri?.Count</span>
+                                    </td>
+                                    <td>@dershane.Yaratan?.Adlar</td>
+                                    <td>@dershane.Tarih?.ToString("dd.MM.yyyy")</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="@Url.Action("Details", "Dershane", new { id = dershane.Id })"
+                                               class="btn btn-outline-info" title="Detay">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            @if (isYonetici)
+                                            {
+                                                <a href="@Url.Action("Edit", "Dershane", new { id = dershane.Id })"
+                                                   class="btn btn-outline-primary" title="Düzenle">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <form asp-action="Delete" method="post" class="d-inline">
+                                                    <input type="hidden" name="id" value="@dershane.Id" />
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                            title="Sil" onclick="return confirm('Bu dershaneyi silmek istediğinizden emin misiniz?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

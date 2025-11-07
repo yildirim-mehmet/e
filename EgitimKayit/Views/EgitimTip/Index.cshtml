@@ -1,0 +1,131 @@
+﻿@model EgitimKayit.ViewModels.EgitimTipIndexViewModel
+
+@{
+    ViewData["Title"] = "Eğitim Tipi Yönetimi";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYonetici = currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Eğitim Tipi Yönetimi</h2>
+        @if (isYonetici)
+        {
+            <a href="@Url.Action("Create", "EgitimTip")" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Yeni Eğitim Tipi
+            </a>
+        }
+    </div>
+
+    <!-- Mesajlar -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Filtre -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filtrele</h5>
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Dershane</label>
+                    <select name="dershaneId" class="form-select" onchange="this.form.submit()">
+                        <option value="">Tüm Dershaneler</option>
+                        @foreach (var dershane in Model.Dershaneler)
+                        {
+                            <option value="@dershane.Id" selected="@(Model.SeciliDershaneId == dershane.Id)">
+                                @dershane.Ad
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Filtreyi Temizle</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Eğitim Tipi Listesi -->
+    <div class="card">
+        <div class="card-body">
+            @if (!Model.EgitimTipleri.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Henüz eğitim tipi bulunmamaktadır.</p>
+                    @if (isYonetici)
+                    {
+                        <a href="@Url.Action("Create", "EgitimTip")" class="btn btn-primary">İlk Eğitim Tipini Oluştur</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Eğitim Tipi Adı</th>
+                                <th>Dershane</th>
+                                <th>Eğitim Şablon Sayısı</th>
+                                <th>Oluşturan</th>
+                                <th>Oluşturma Tarihi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var egitimTip in Model.EgitimTipleri)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@egitimTip.Ad</strong>
+                                    </td>
+                                    <td>@egitimTip.Dershane?.Ad</td>
+                                    <td>
+                                        <span class="badge bg-info">@egitimTip.EgitimSablonlari?.Count</span>
+                                    </td>
+                                    <td>@egitimTip.Yaratan?.Adlar</td>
+                                    <td>@egitimTip.Tarih?.ToString("dd.MM.yyyy")</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="@Url.Action("Details", "EgitimTip", new { id = egitimTip.Id })"
+                                               class="btn btn-outline-info" title="Detay">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            @if (isYonetici)
+                                            {
+                                                <a href="@Url.Action("Edit", "EgitimTip", new { id = egitimTip.Id })"
+                                                   class="btn btn-outline-primary" title="Düzenle">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <form asp-action="Delete" method="post" class="d-inline">
+                                                    <input type="hidden" name="id" value="@egitimTip.Id" />
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                            title="Sil" onclick="return confirm('Bu eğitim tipini silmek istediğinizden emin misiniz?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

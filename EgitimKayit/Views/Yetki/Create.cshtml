@@ -1,0 +1,237 @@
+﻿@model EgitimKayit.ViewModels.YetkiViewModel
+
+@{
+    ViewData["Title"] = "Yetki Ata";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Yetki Ata</h2>
+        <a href="@Url.Action("Index", "Yetki")" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Listeye Dön
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Yetki Atama İşlemi</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post" id="yetkiForm">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Personel TC Girişi -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label asp-for="PerTc" class="form-label"></label>
+                                    <div class="input-group">
+                                        <input asp-for="PerTc" class="form-control"
+                                               placeholder="Personel TC Kimlik No girin"
+                                               id="personelTcInput" />
+                                        <button type="button" class="btn btn-outline-secondary"
+                                                id="personelAraBtn">
+                                            <i class="bi bi-search"></i> Ara
+                                        </button>
+                                    </div>
+                                    <span asp-validation-for="PerTc" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personel Bilgileri (AJAX ile doldurulacak) -->
+                        <div class="row mb-4" id="personelBilgileri" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Personel Bilgileri</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <strong>Ad Soyad:</strong>
+                                                <span id="personelAd">-</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <strong>Tip:</strong>
+                                                <span id="personelTip">-</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <strong>Statü:</strong>
+                                                <span id="personelStatu">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
+                                                <strong>Birim 1:</strong>
+                                                <span id="personelBirim1">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dershane Seçimi -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label asp-for="DerId" class="form-label"></label>
+                                    <select asp-for="DerId" class="form-select" required>
+                                        <option value="">Dershane seçiniz...</option>
+                                        @foreach (var dershane in Model.Dershaneler ?? new List<Dershane>())
+                                        {
+                                            <option value="@dershane.Id">@dershane.Ad</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="DerId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Uyarı Mesajı -->
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Not:</strong> Sadece <strong>Öğretmen, Sorumlu veya Yönetici</strong>
+                            tipindeki personellere yetki atanabilir.
+                        </div>
+
+                        <!-- Butonlar -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                                    <i class="bi bi-person-check"></i> Yetki Ata
+                                </button>
+                                <a href="@Url.Action("Index", "Yetki")" class="btn btn-secondary">İptal</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            let personelBulundu = false;
+
+            // Personel ara butonu
+            $('#personelAraBtn').click(function () {
+                const tc = $('#personelTcInput').val().trim();
+
+                if (!tc) {
+                    alert('Lütfen TC Kimlik No giriniz.');
+                    return;
+                }
+
+                // TC format kontrolü (opsiyonel)
+                if (tc.length < 11) {
+                    alert('TC Kimlik No 11 karakter olmalıdır.');
+                    return;
+                }
+
+                // Loading göster
+                $('#personelAraBtn').html('<i class="bi bi-hourglass-split"></i> Aranıyor...');
+                $('#personelAraBtn').prop('disabled', true);
+
+                // AJAX ile personel bilgilerini getir
+                $.getJSON('@Url.Action("GetPersonelByTc", "Yetki")', { tc: tc })
+                    .done(function (data) {
+                        if (data.success) {
+                            // Personel bilgilerini göster
+                            $('#personelAd').text(data.adlar);
+                            $('#personelTip').text(data.tip);
+                            $('#personelStatu').text(data.statu || '-');
+                            $('#personelBirim1').text(data.birim1 || '-');
+
+                            $('#personelBilgileri').show();
+                            $('#submitBtn').prop('disabled', false);
+                            personelBulundu = true;
+
+                            // Başarı mesajı
+                            showAlert('Personel bulundu. Yetki atayabilirsiniz.', 'success');
+                        } else {
+                            // Hata mesajı
+                            $('#personelBilgileri').hide();
+                            $('#submitBtn').prop('disabled', true);
+                            personelBulundu = false;
+
+                            showAlert(data.message, 'danger');
+                        }
+                    })
+                    .fail(function () {
+                        $('#personelBilgileri').hide();
+                        $('#submitBtn').prop('disabled', true);
+                        personelBulundu = false;
+
+                        showAlert('Personel bilgileri alınırken hata oluştu.', 'danger');
+                    })
+                    .always(function () {
+                        // Loading'i kaldır
+                        $('#personelAraBtn').html('<i class="bi bi-search"></i> Ara');
+                        $('#personelAraBtn').prop('disabled', false);
+                    });
+            });
+
+            // Enter tuşu ile arama
+            $('#personelTcInput').keypress(function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    $('#personelAraBtn').click();
+                }
+            });
+
+            // Form gönderim kontrolü
+            $('#yetkiForm').submit(function (e) {
+                if (!personelBulundu) {
+                    e.preventDefault();
+                    showAlert('Lütfen önce personel bilgilerini kontrol edin.', 'warning');
+                    return false;
+                }
+
+                const dershaneSecili = $('#DerId').val();
+                if (!dershaneSecili) {
+                    e.preventDefault();
+                    showAlert('Lütfen bir dershane seçin.', 'warning');
+                    return false;
+                }
+
+                return true;
+            });
+
+            // Alert fonksiyonu
+            function showAlert(message, type) {
+                const alertClass = type === 'success' ? 'alert-success' :
+                                 type === 'danger' ? 'alert-danger' :
+                                 type === 'warning' ? 'alert-warning' : 'alert-info';
+
+                // Mevcut alert'leri temizle
+                $('.dynamic-alert').remove();
+
+                // Yeni alert oluştur
+                const alertHtml = `
+                    <div class="alert ${alertClass} alert-dismissible fade show dynamic-alert mt-3">
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `;
+
+                $('#personelBilgileri').after(alertHtml);
+            }
+
+            // TC input değişince formu sıfırla
+            $('#personelTcInput').on('input', function () {
+                $('#personelBilgileri').hide();
+                $('#submitBtn').prop('disabled', true);
+                personelBulundu = false;
+                $('.dynamic-alert').remove();
+            });
+        });
+    </script>
+}

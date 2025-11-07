@@ -1,0 +1,83 @@
+﻿@model EgitimKayit.ViewModels.EgitilenEditViewModel
+
+@{
+    ViewData["Title"] = "Katılımcı Düzenle";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Katılımcı Bilgilerini Düzenle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="EgtProgId" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">TC Kimlik No</label>
+                                <input type="text" class="form-control" value="@Model.PerTc" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Ad Soyad</label>
+                                <input type="text" class="form-control" value="@Model.Adlar" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Dk" class="form-label"></label>
+                                <input asp-for="Dk" type="number" class="form-control" min="0" max="1000" />
+                                <span asp-validation-for="Dk" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Yapildi" class="form-label"></label>
+                                <div class="form-check form-switch mt-2">
+                                    <input asp-for="Yapildi" class="form-check-input" type="checkbox" />
+                                    <label class="form-check-label" asp-for="Yapildi">Tamamlandı</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="BasTar" class="form-label"></label>
+                                <input asp-for="BasTar" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="BasTar" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="BitTar" class="form-label"></label>
+                                <input asp-for="BitTar" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="BitTar" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Aciklama" class="form-label"></label>
+                            <textarea asp-for="Aciklama" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Aciklama" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check"></i> Güncelle
+                            </button>
+                            <a href="@Url.Action("Index", new { egitimProgramId = Model.EgtProgId })"
+                               class="btn btn-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

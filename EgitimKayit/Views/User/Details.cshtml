@@ -1,0 +1,148 @@
+﻿@model EgitimKayit.Models.Personel
+
+@{
+    ViewData["Title"] = "Kullanıcı Detayları";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Kullanıcı Detayları</h2>
+        <div>
+            <a href="@Url.Action("Index", "User")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Listeye Dön
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Temel Bilgiler</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">TC Kimlik No:</dt>
+                                <dd class="col-sm-8">@Model.Tc</dd>
+
+                                <dt class="col-sm-4">Ad Soyad:</dt>
+                                <dd class="col-sm-8">@Model.Adlar</dd>
+
+                                <dt class="col-sm-4">Kullanıcı Tipi:</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge
+                                        @(Model.Tip == "yonetici" ? "bg-danger" :
+                                                                                    Model.Tip == "sorumlu" ? "bg-warning" :
+                                                                                    Model.Tip == "ogretmen" ? "bg-info" :
+                                                                                    Model.Tip == "talepci" ? "bg-primary" : "bg-secondary")">
+                                        @Model.Tip
+                                    </span>
+                                </dd>
+
+                                <dt class="col-sm-4">Statü:</dt>
+                                <dd class="col-sm-8">@Model.StatuBilgi?.Anlam</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-sm-4">Kuvvet:</dt>
+                                <dd class="col-sm-8">@Model.Kuvvet</dd>
+
+                                <dt class="col-sm-4">Sınıf:</dt>
+                                <dd class="col-sm-8">@Model.Sinif</dd>
+
+                                <dt class="col-sm-4">Sicil No:</dt>
+                                <dd class="col-sm-8">@Model.Sicil</dd>
+
+                                <dt class="col-sm-4">Durum:</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge @(Model.Aktif == 1 ? "bg-success" : "bg-danger")">
+                                        @(Model.Aktif == 1 ? "Aktif" : "Pasif")
+                                    </span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Birim Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Birim 1:</strong><br />
+                            <p class="mt-1">@Model.Birim1</p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Birim 2:</strong><br />
+                            <p class="mt-1">@Model.Birim2</p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Birim 3:</strong><br />
+                            <p class="mt-1">@Model.Birim3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">İşlemler</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Edit", "User", new { tc = Model.Tc })"
+                           class="btn btn-primary">
+                            <i class="bi bi-pencil"></i> Kullanıcıyı Düzenle
+                        </a>
+                        <a href="@Url.Action("ResetPassword", "User", new { tc = Model.Tc })"
+                           class="btn btn-warning">
+                            <i class="bi bi-key"></i> Şifre Sıfırla
+                        </a>
+                        @if (Context.Session.GetString("PersonelTip") == "yonetici")
+                        {
+                            <form asp-action="Delete" method="post" class="d-grid">
+                                <input type="hidden" name="tc" value="@Model.Tc" />
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Kullanıcıyı pasifleştirmek istediğinizden emin misiniz?')">
+                                    <i class="bi bi-trash"></i> Kullanıcıyı Pasifleştir
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Sistem Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <dl>
+                        <dt>Kayıt Tarihi:</dt>
+                        <dd>@Model.Tarih?.ToString("dd.MM.yyyy HH:mm")</dd>
+
+                        <dt>Alan:</dt>
+                        <dd>@(string.IsNullOrEmpty(Model.Alan) ? "Belirtilmemiş" : Model.Alan)</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Resim))
+                        {
+                            <dt>Profil Resmi:</dt>
+                            <dd>
+                                <img src="@Model.Resim" alt="Profil Resmi"
+                                     class="img-thumbnail" style="max-width: 100px;" />
+                            </dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

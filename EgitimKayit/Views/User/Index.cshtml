@@ -1,0 +1,110 @@
+﻿@model IEnumerable<EgitimKayit.Models.Personel>
+
+@{
+    ViewData["Title"] = "Kullanıcı Yönetimi";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Kullanıcı Yönetimi</h2>
+        <a href="@Url.Action("CreateUser", "Account")" class="btn btn-primary">
+            <i class="bi bi-person-plus"></i> Yeni Kullanıcı
+        </a>
+    </div>
+
+    <!-- Mesajlar -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Kullanıcı Listesi -->
+    <div class="card">
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Henüz kullanıcı bulunmamaktadır.</p>
+                    <a href="@Url.Action("CreateUser", "Account")" class="btn btn-primary">İlk Kullanıcıyı Oluştur</a>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>TC</th>
+                                <th>Ad Soyad</th>
+                                <th>Tip</th>
+                                <th>Statü</th>
+                                <th>Birim 1</th>
+                                <th>Kayıt Tarihi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var kullanici in Model)
+                            {
+                                <tr>
+                                    <td>@kullanici.Tc</td>
+                                    <td>@kullanici.Adlar</td>
+                                    <td>
+                                        <span class="badge
+                                                    @(kullanici.Tip == "yonetici" ? "bg-danger" :
+                                                                                            kullanici.Tip == "sorumlu" ? "bg-warning" :
+                                                                                            kullanici.Tip == "ogretmen" ? "bg-info" :
+                                                                                            kullanici.Tip == "talepci" ? "bg-primary" : "bg-secondary")">
+                                    @kullanici.Tip
+                                </span>
+                            </td>
+                            <td>@kullanici.StatuBilgi?.Anlam</td>
+                            <td>@kullanici.Birim1</td>
+                            <td>@kullanici.Tarih?.ToString("dd.MM.yyyy")</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="@Url.Action("Details", "User", new { tc = kullanici.Tc })"
+                                       class="btn btn-outline-info" title="Detay">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="@Url.Action("Edit", "User", new { tc = kullanici.Tc })"
+                                       class="btn btn-outline-primary" title="Düzenle">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="@Url.Action("ResetPassword", "User", new { tc = kullanici.Tc })"
+                                       class="btn btn-outline-warning" title="Şifre Sıfırla">
+                                        <i class="bi bi-key"></i>
+                                    </a>
+                                    @if (currentUserTip == "yonetici")
+                                            {
+                                                <form asp-action="Delete" method="post" class="d-inline">
+                                                    <input type="hidden" name="tc" value="@kullanici.Tc" />
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                            title="Sil" onclick="return confirm('Kullanıcıyı pasifleştirmek istediğinizden emin misiniz?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

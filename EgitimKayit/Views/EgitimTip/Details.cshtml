@@ -1,0 +1,130 @@
+﻿@model EgitimKayit.Models.EgitimTip
+
+@{
+    ViewData["Title"] = "Eğitim Tipi Detayları";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYonetici = currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Eğitim Tipi Detayları</h2>
+        <div>
+            <a href="@Url.Action("Index", "EgitimTip")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Listeye Dön
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Eğitim Tipi Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Eğitim Tipi Adı:</dt>
+                        <dd class="col-sm-9"><strong>@Model.Ad</strong></dd>
+
+                        <dt class="col-sm-3">Dershane:</dt>
+                        <dd class="col-sm-9">@Model.Dershane?.Ad</dd>
+
+                        <dt class="col-sm-3">Eğitim Şablon Sayısı:</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge bg-info">@Model.EgitimSablonlari?.Count</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Eğitim Şablonları -->
+            <div class="card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Eğitim Şablonları</h5>
+                    @if (isYonetici)
+                    {
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="bi bi-plus"></i> Şablon Ekle
+                        </a>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (Model.EgitimSablonlari == null || !Model.EgitimSablonlari.Any())
+                    {
+                        <p class="text-muted">Bu eğitim tipine ait şablon bulunmamaktadır.</p>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var sablon in Model.EgitimSablonlari)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">@sablon.Ad</h6>
+                                        <small class="text-muted">@sablon.Aciklama</small>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="#" class="btn btn-outline-info btn-sm">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        @if (isYonetici)
+                                        {
+                                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">İşlemler</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        @if (isYonetici)
+                        {
+                            <a href="@Url.Action("Edit", "EgitimTip", new { id = Model.Id })"
+                               class="btn btn-primary">
+                                <i class="bi bi-pencil"></i> Eğitim Tipini Düzenle
+                            </a>
+                            <form asp-action="Delete" method="post" class="d-grid">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Bu eğitim tipini silmek istediğinizden emin misiniz?')">
+                                    <i class="bi bi-trash"></i> Eğitim Tipini Sil
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Sistem Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <dl>
+                        <dt>Oluşturan:</dt>
+                        <dd>@Model.Yaratan?.Adlar</dd>
+
+                        <dt>Oluşturulma Tarihi:</dt>
+                        <dd>@Model.Tarih?.ToString("dd.MM.yyyy HH:mm")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

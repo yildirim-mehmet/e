@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    var personelAd = ViewBag.PersonelAd as string;
+    var personelTip = ViewBag.PersonelTip as string;
+}
+
+<div class="container-fluid">
+    <!-- Başlık ve Hoş Geldiniz -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-4">Eğitim Kayıt Takip Sistemi</h1>
+            <p class="lead">Hoş geldiniz, <strong>@personelAd</strong> [@personelTip]</p>
+        </div>
+    </div>
+
+    <!-- Hızlı İşlem Kartları -->
+    <div class="row">
+        <!-- Öğrenci için kartlar -->
+        @if (@Context.Session.GetString("PersonelTip") == "ogrenci")
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Katıldığım Eğitimler</h5>
+                        <p class="card-text">Geçmişte katıldığınız eğitimleri görüntüleyin.</p>
+                        <a href="#" class="btn btn-light">Görüntüle</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Talepci için kartlar -->
+        @if (@Context.Session.GetString("PersonelTip") == "talepci" || @Context.Session.GetString("PersonelTip") == "ogretmen")
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Yeni Eğitim</h5>
+                        <p class="card-text">Yeni bir eğitim programı oluşturun.</p>
+                        <a href="#" class="btn btn-light">Oluştur</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Eğitim Listesi</h5>
+                        <p class="card-text">Mevcut eğitim programlarını görüntüleyin.</p>
+                        <a href="#" class="btn btn-light">Listele</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Öğretmen için kartlar -->
+        @if (@Context.Session.GetString("PersonelTip") == "ogretmen")
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Onay Bekleyenler</h5>
+                        <p class="card-text">Onayınızı bekleyen eğitim programları.</p>
+                        <a href="#" class="btn btn-light">İncele</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Sorumlu ve Yönetici için kartlar -->
+        @if (@Context.Session.GetString("PersonelTip") == "sorumlu" || @Context.Session.GetString("PersonelTip") == "yonetici")
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Raporlar</h5>
+                        <p class="card-text">Detaylı eğitim raporlarını görüntüleyin.</p>
+                        <a href="#" class="btn btn-light">Rapor Al</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">Yetki Yönetimi</h5>
+                        <p class="card-text">Personel yetkilerini düzenleyin.</p>
+                        <a href="#" class="btn btn-light">Yönet</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Tüm kullanıcılar için -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Şifre Değiştir</h5>
+                    <p class="card-text">Hesap şifrenizi değiştirin.</p>
+                    <a href="@Url.Action("ChangePassword", "Account")" class="btn btn-light">Değiştir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Son Eğitimler (Örnek) -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Son Eğitimleriniz</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Bu alanda son katıldığınız eğitimler görüntülenecek.</p>
+                    <!-- Bu kısım daha sonra dinamik veri ile doldurulacak -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

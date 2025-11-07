@@ -1,0 +1,327 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Toplu Personel Ekle";
+    var egitimProgram = ViewBag.EgitimProgram as EgitimKayit.Models.EgitimProgram;
+    var personeller = ViewBag.Personeller as List<EgitimKayit.Models.Personel>;
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Toplu Personel Ekle</h4>
+                </div>
+                <div class="card-body">
+                    @if (egitimProgram != null)
+                    {
+                        <div class="alert alert-info">
+                            <h6>Eğitim Bilgileri</h6>
+                            <p class="mb-1"><strong>Eğitim:</strong> @egitimProgram.EgitimSablon?.Ad</p>
+                            <p class="mb-1"><strong>Dershane:</strong> @egitimProgram.EgitimSablon?.Dershane?.Ad</p>
+                            <p class="mb-0"><strong>Eğitim Tipi:</strong> @egitimProgram.EgitimSablon?.EgitimTip?.Ad</p>
+                        </div>
+                    }
+
+                    <form asp-action="CreateMultiple" method="post" id="multiForm">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="egitimProgramId" value="@Model" />
+
+                        <!-- Arama ve Filtre -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input type="text" id="searchInput" class="form-control" placeholder="TC veya Ad Soyad ile ara...">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="checkbox" id="selectAll" class="form-check-input">
+                                    <label class="form-check-label" for="selectAll">Tümünü Seç</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personel Listesi -->
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-light sticky-top">
+                                    <tr>
+                                        <th width="50">Seç</th>
+                                        <th>TC Kimlik No</th>
+                                        <th>Ad Soyad</th>
+                                        <th>Statü</th>
+                                        <th>Birim</th>
+                                        <th>Tip</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="personelTable">
+                                    @foreach (var personel in personeller)
+                                    {
+                                        <tr class="personel-row">
+                                            <td>
+                                                <input type="checkbox" name="selectedPersoneller" value="@personel.Tc" class="personel-checkbox" />
+                                            </td>
+                                            <td>@personel.Tc</td>
+                                            <td>@personel.Adlar</td>
+                                            <td>@personel.StatuBilgi?.Anlam</td>
+                                            <td>@personel.Birim1</td>
+                                            <td>
+                                                <span class="badge bg-secondary">@personel.Tip</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Seçili Sayısı -->
+                        <div class="mt-3">
+                            <p id="selectedCount" class="text-muted">0 personel seçildi</p>
+                        </div>
+
+                        <!-- Butonlar -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                            <button type="submit" class="btn btn-success" id="submitBtn" disabled>
+                                <i class="bi bi-people"></i> Seçilenleri Ekle (@Model)
+                            </button>
+                            <a href="@Url.Action("Index", new { egitimProgramId = Model })"
+                               class="btn btn-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Tümünü seç
+            $('#selectAll').change(function () {
+                $('.personel-checkbox').prop('checked', this.checked);
+                updateSelectedCount();
+            });
+
+            // Bireysel seçim
+            $('.personel-checkbox').change(function () {
+                updateSelectedCount();
+                $('#selectAll').prop('checked', $('.personel-checkbox:checked').length === $('.personel-checkbox').length);
+            });
+
+            // Arama
+            $('#searchInput').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('.personel-row').filter(function () {
+                    $(this).toggle(
+                        $(this).text().toLowerCase().indexOf(value) > -1
+                    );
+                });
+            });
+
+            // Seçili sayısını güncelle
+            function updateSelectedCount() {
+                var selectedCount = $('.personel-checkbox:checked').length;
+                $('#selectedCount').text(selectedCount + ' personel seçildi');
+                $('#submitBtn').prop('disabled', selectedCount === 0);
+                $('#submitBtn').text('Seçilenleri Ekle (' + selectedCount + ')');
+            }
+
+            // Form gönderiminden önce kontrol
+            $('#multiForm').submit(function (e) {
+                if ($('.personel-checkbox:checked').length === 0) {
+                    e.preventDefault();
+                    alert('En az bir personel seçmelisiniz.');
+                    return false;
+                }
+            });
+        });
+    </script>
+}
+
+
+@* @model int
+@{
+    ViewData["Title"] = "Toplu Personel Ekle";
+    var egitimProgram = ViewBag.EgitimProgram as EgitimKayit.Models.EgitimProgram;
+    var personeller = ViewBag.Personeller as List<EgitimKayit.Models.Personel>;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Toplu Personel Ekle</h2>
+        <a href="@Url.Action("Index", new { egitimProgramId = Model })" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Listeye Dön
+        </a>
+    </div>
+
+    <!-- Eğitim Bilgileri -->
+    @if (egitimProgram != null)
+    {
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Eğitim Bilgileri</h5>
+                <p class="mb-1"><strong>Eğitim:</strong> @egitimProgram.EgitimSablon?.Ad</p>
+                <p class="mb-1"><strong>Dershane:</strong> @egitimProgram.EgitimSablon?.Dershane?.Ad</p>
+                <p class="mb-0"><strong>Tip:</strong> @egitimProgram.EgitimSablon?.EgitimTip?.Ad</p>
+            </div>
+        </div>
+    }
+
+    <!-- Mesajlar -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Personel Listesi -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Personel Listesi</h5>
+        </div>
+        <div class="card-body">
+            @if (personeller == null || !personeller.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Sistemde aktif personel bulunmamaktadır.</p>
+                </div>
+            }
+            else
+            {
+                <form id="personelForm" asp-action="CreateMultiple" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="egitimProgramId" value="@Model" />
+
+                    <!-- Arama ve Filtre -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" id="searchInput" class="form-control" placeholder="TC veya isme göre ara...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="selectAll">
+                                <label class="form-check-label" for="selectAll">
+                                    Tümünü Seç
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personel Tablosu -->
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark sticky-top">
+                                <tr>
+                                    <th width="50">Seç</th>
+                                    <th>TC Kimlik No</th>
+                                    <th>Ad Soyad</th>
+                                    <th>Statü</th>
+                                    <th>Birim</th>
+                                    <th>Tip</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var personel in personeller)
+                                {
+                                    <tr class="personel-row">
+                                        <td>
+                                            <input class="form-check-input personel-checkbox"
+                                                   type="checkbox"
+                                                   name="selectedPersoneller"
+                                                   value="@personel.Tc"
+                                                   data-tc="@personel.Tc"
+                                                   data-ad="@personel.Adlar">
+                                        </td>
+                                        <td>@personel.Tc</td>
+                                        <td>
+                                            <strong>@personel.Adlar</strong>
+                                        </td>
+                                        <td>@personel.StatuBilgi?.Anlam</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(personel.Birim1))
+                                            {
+                                                <span>@personel.Birim1</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">-</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">@personel.Tip</span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Seçili Sayısı -->
+                    <div class="mt-3 p-3 bg-light rounded">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <strong id="selectedCount">0</strong> personel seçildi
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <button type="submit" class="btn btn-primary" id="submitButton" disabled>
+                                    <i class="bi bi-person-plus"></i> Seçilenleri Ekle
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Tümünü seç
+            $('#selectAll').change(function () {
+                $('.personel-checkbox').prop('checked', this.checked);
+                updateSelectedCount();
+            });
+
+            // Bireysel seçim
+            $('.personel-checkbox').change(function () {
+                updateSelectedCount();
+                $('#selectAll').prop('checked',
+                    $('.personel-checkbox:checked').length === $('.personel-checkbox').length
+                );
+            });
+
+            // Arama
+            $('#searchInput').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('.personel-row').filter(function () {
+                    var tc = $(this).find('td:nth-child(2)').text().toLowerCase();
+                    var ad = $(this).find('td:nth-child(3)').text().toLowerCase();
+                    $(this).toggle(tc.indexOf(value) > -1 || ad.indexOf(value) > -1);
+                });
+            });
+
+            // Seçili sayısını güncelle
+            function updateSelectedCount() {
+                var selectedCount = $('.personel-checkbox:checked').length;
+                $('#selectedCount').text(selectedCount);
+                $('#submitButton').prop('disabled', selectedCount === 0);
+            }
+
+            // Form gönderim kontrolü
+            $('#personelForm').submit(function (e) {
+                var selectedCount = $('.personel-checkbox:checked').length;
+                if (selectedCount === 0) {
+                    e.preventDefault();
+                    alert('En az bir personel seçmelisiniz.');
+                    return false;
+                }
+
+                return confirm(selectedCount + ' personeli eğitim programına eklemek istediğinizden emin misiniz?');
+            });
+        });
+    </script>
+} *@

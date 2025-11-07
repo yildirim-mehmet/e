@@ -1,0 +1,143 @@
+﻿@model EgitimKayit.ViewModels.EditUserViewModel
+
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYonetici = currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Kullanıcı Düzenle</h2>
+        <a href="@Url.Action("Details", "User", new { tc = Model.Tc })" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> İptal
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Kullanıcı Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Tc" />
+
+                        <!-- Temel Bilgiler -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Tc" class="form-label"></label>
+                                <input asp-for="Tc" class="form-control" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Adlar" class="form-label"></label>
+                                <input asp-for="Adlar" class="form-control" />
+                                <span asp-validation-for="Adlar" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Kullanıcı Tipi -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Tip" class="form-label"></label>
+                                @if (isYonetici)
+                                {
+                                    <select asp-for="Tip" class="form-select">
+                                        <option value="ogrenci">Öğrenci</option>
+                                        <option value="talepci">Talepçi</option>
+                                        <option value="ogretmen">Öğretmen</option>
+                                        <option value="sorumlu">Sorumlu</option>
+                                        <option value="yonetici">Yönetici</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select asp-for="Tip" class="form-select" disabled>
+                                        <option value="ogrenci">Öğrenci</option>
+                                        <option value="talepci">Talepçi</option>
+                                        <option value="ogretmen">Öğretmen</option>
+                                        <option value="sorumlu">Sorumlu</option>
+                                    </select>
+                                    <input type="hidden" asp-for="Tip" />
+                                    <small class="text-muted">Sadece yöneticiler kullanıcı tipini değiştirebilir.</small>
+                                }
+                                <span asp-validation-for="Tip" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="StatuId" class="form-label"></label>
+                                <select asp-for="StatuId" class="form-select">
+                                    <option value="">Seçiniz...</option>
+                                    @foreach (var statu in Model.StatuList ?? new List<Statu>())
+                                    {
+                                        <option value="@statu.StatuDeger">@statu.Anlam</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Diğer Bilgiler -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Kuvvet" class="form-label"></label>
+                                <select asp-for="Kuvvet" class="form-select">
+                                    <option value="">Seçiniz...</option>
+                                    <option value="Deniz Yolu">Deniz Yolu</option>
+                                    <option value="Kara YOLU">Kara YOLU</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Sinif" class="form-label"></label>
+                                <input asp-for="Sinif" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Sicil" class="form-label"></label>
+                                <input asp-for="Sicil" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Birim Bilgileri -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Birim1" class="form-label"></label>
+                                <select asp-for="Birim1" class="form-select">
+                                    <option value="">Seçiniz...</option>
+                                    @foreach (var birim in Model.Birim1List ?? new List<Birim>())
+                                    {
+                                        <option value="@birim.Ad">@birim.Ad</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Birim2" class="form-label"></label>
+                                <input asp-for="Birim2" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Birim3" class="form-label"></label>
+                                <input asp-for="Birim3" class="form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Butonlar -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check"></i> Değişiklikleri Kaydet
+                                </button>
+                                <a href="@Url.Action("Details", "User", new { tc = Model.Tc })"
+                                   class="btn btn-secondary">İptal</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

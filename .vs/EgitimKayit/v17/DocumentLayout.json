@@ -1,0 +1,494 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\000_checklist.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\000_checklist.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\controllers\\egitilencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\controllers\\egitilencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitilen\\excelupload.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitilen\\excelupload.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitilen\\createmultiple.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitilen\\createmultiple.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\viewmodels\\exceluploadviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\viewmodels\\exceluploadviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\viewmodels\\egitileneditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\viewmodels\\egitileneditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\viewmodels\\egitilenviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\viewmodels\\egitilenviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitilen\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitilen\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitilen\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitilen\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitilen\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitilen\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitimprogram\\createmultiple.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitimprogram\\createmultiple.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\home\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\home\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\viewmodels\\egitilenindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\viewmodels\\egitilenindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\viewmodels\\egitimprogramindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\viewmodels\\egitimprogramindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\viewmodels\\egitimprogramviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\viewmodels\\egitimprogramviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitimprogram\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitimprogram\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitimprogram\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitimprogram\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitimprogram\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitimprogram\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\views\\egitimprogram\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\views\\egitimprogram\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\controllers\\egitimprogramcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\controllers\\egitimprogramcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\models\\personel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\models\\personel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|e:\\mehmet\\egitim\\egitimkayit_06112025_1705\\egitimkayit\\models\\egitimprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3899C9FD-7301-4FE1-B107-7BB89658981A}|EgitimKayit\\EgitimKayit.csproj|solutionrelative:egitimkayit\\models\\egitimprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Home\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Home\\Dashboard.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Home\\Dashboard.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Home\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T11:45:11.459Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "000_CheckList.txt",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\000_CheckList.txt",
+              "RelativeDocumentMoniker": "EgitimKayit\\000_CheckList.txt",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\000_CheckList.txt",
+              "RelativeToolTip": "EgitimKayit\\000_CheckList.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-07T13:08:12.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\appsettings.json",
+              "RelativeDocumentMoniker": "EgitimKayit\\appsettings.json",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\appsettings.json",
+              "RelativeToolTip": "EgitimKayit\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-07T12:17:51.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateMultiple.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\CreateMultiple.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Egitilen\\CreateMultiple.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\CreateMultiple.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Egitilen\\CreateMultiple.cshtml",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAIoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T13:57:21.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\Edit.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Egitilen\\Edit.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\Edit.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Egitilen\\Edit.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAFIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T12:39:48.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateMultiple.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\CreateMultiple.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\EgitimProgram\\CreateMultiple.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\CreateMultiple.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\EgitimProgram\\CreateMultiple.cshtml",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAIUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T12:24:11.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Controllers\\AccountController.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "EgitimKayit\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAFIBAAAAAAAAAAASwGUBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:10:17.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EgitilenController.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Controllers\\EgitilenController.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Controllers\\EgitilenController.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Controllers\\EgitilenController.cs",
+              "RelativeToolTip": "EgitimKayit\\Controllers\\EgitilenController.cs",
+              "ViewState": "AgIAAIEBAAAAAAAAAAAvwB8CAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T11:02:51.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ExcelUpload.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\ExcelUpload.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Egitilen\\ExcelUpload.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\ExcelUpload.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Egitilen\\ExcelUpload.cshtml",
+              "ViewState": "AgIAADoAAAAAAAAAAAAmwF8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T14:02:59.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAAAH8AAAB7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T11:30:52.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\Index.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Egitilen\\Index.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\Index.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Egitilen\\Index.cshtml",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAcwKMAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T11:09:36.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EgitilenEditViewModel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitilenEditViewModel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\ViewModels\\EgitilenEditViewModel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitilenEditViewModel.cs",
+              "RelativeToolTip": "EgitimKayit\\ViewModels\\EgitilenEditViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:47:50.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ExcelUploadViewModel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\ExcelUploadViewModel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\ViewModels\\ExcelUploadViewModel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\ExcelUploadViewModel.cs",
+              "RelativeToolTip": "EgitimKayit\\ViewModels\\ExcelUploadViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T13:55:22.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Program.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Program.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Program.cs",
+              "RelativeToolTip": "EgitimKayit\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T11:50:57.724Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EgitilenViewModel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitilenViewModel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\ViewModels\\EgitilenViewModel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitilenViewModel.cs",
+              "RelativeToolTip": "EgitimKayit\\ViewModels\\EgitilenViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T11:18:29.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\Create.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Egitilen\\Create.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Egitilen\\Create.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Egitilen\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T11:27:41.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Home\\Index.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T11:44:26.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\Account\\Login.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAsAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T11:46:35.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "EgitilenIndexViewModel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitilenIndexViewModel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\ViewModels\\EgitilenIndexViewModel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitilenIndexViewModel.cs",
+              "RelativeToolTip": "EgitimKayit\\ViewModels\\EgitilenIndexViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T11:10:34.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Index.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\EgitimProgram\\Index.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Index.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\EgitimProgram\\Index.cshtml",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAuwJYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T10:29:09.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "EgitimKayit\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAhwLoAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:09:56.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "EgitimProgramController.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Controllers\\EgitimProgramController.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Controllers\\EgitimProgramController.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Controllers\\EgitimProgramController.cs",
+              "RelativeToolTip": "EgitimKayit\\Controllers\\EgitimProgramController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:04:36.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "EgitimProgramViewModel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitimProgramViewModel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\ViewModels\\EgitimProgramViewModel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitimProgramViewModel.cs",
+              "RelativeToolTip": "EgitimKayit\\ViewModels\\EgitimProgramViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:04:28.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "EgitimProgramIndexViewModel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitimProgramIndexViewModel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\ViewModels\\EgitimProgramIndexViewModel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\ViewModels\\EgitimProgramIndexViewModel.cs",
+              "RelativeToolTip": "EgitimKayit\\ViewModels\\EgitimProgramIndexViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:04:30.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Personel.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Models\\Personel.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Models\\Personel.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Models\\Personel.cs",
+              "RelativeToolTip": "EgitimKayit\\Models\\Personel.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAwF4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:16:38.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Create.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\EgitimProgram\\Create.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Create.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\EgitimProgram\\Create.cshtml",
+              "ViewState": "AgIAADoAAAAAAAAAAAAuwGAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T10:36:12.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Edit.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\EgitimProgram\\Edit.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Edit.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\EgitimProgram\\Edit.cshtml",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAuwG0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T10:39:17.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Details.cshtml",
+              "RelativeDocumentMoniker": "EgitimKayit\\Views\\EgitimProgram\\Details.cshtml",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Views\\EgitimProgram\\Details.cshtml",
+              "RelativeToolTip": "EgitimKayit\\Views\\EgitimProgram\\Details.cshtml",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAAAJoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-06T10:39:48.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "EgitimProgram.cs",
+              "DocumentMoniker": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Models\\EgitimProgram.cs",
+              "RelativeDocumentMoniker": "EgitimKayit\\Models\\EgitimProgram.cs",
+              "ToolTip": "E:\\MEHMET\\egitim\\EgitimKayit_06112025_1705\\EgitimKayit\\Models\\EgitimProgram.cs",
+              "RelativeToolTip": "EgitimKayit\\Models\\EgitimProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T10:04:17.872Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

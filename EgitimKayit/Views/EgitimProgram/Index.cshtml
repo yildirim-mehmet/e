@@ -1,0 +1,161 @@
+﻿@model EgitimKayit.ViewModels.EgitimProgramIndexViewModel
+
+@{
+    ViewData["Title"] = "Eğitim Programları";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYetkili = currentUserTip == "talepci" || currentUserTip == "ogretmen" ||
+                   currentUserTip == "sorumlu" || currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Eğitim Programları</h2>
+        @if (isYetkili)
+        {
+            <a href="@Url.Action("Create", "EgitimProgram")" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Yeni Program
+            </a>
+        }
+    </div>
+
+    <!-- Mesajlar -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Filtre -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filtrele</h5>
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Eğitim Şablonu</label>
+                    <select name="egitimSablonId" class="form-select">
+                        <option value="">Tüm Şablonlar</option>
+                        @foreach (var sablon in Model.EgitimSablonlari)
+                        {
+                            <option value="@sablon.Id" selected="@(Model.SeciliEgitimSablonId == sablon.Id)">
+                                @sablon.Ad - @sablon.Dershane?.Ad
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Onay Durumu</label>
+                    <select name="onayDurumu" class="form-select">
+                        <option value="">Tüm Durumlar</option>
+                        <option value="1" selected="@(Model.SeciliOnayDurumu == 1)">Onaylı</option>
+                        <option value="0" selected="@(Model.SeciliOnayDurumu == 0)">Reddedildi</option>
+                        <option value="2" selected="@(Model.SeciliOnayDurumu == 2)">Beklemede</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">Filtrele</button>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Temizle</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Eğitim Programları Listesi -->
+    <div class="card">
+        <div class="card-body">
+            @if (!Model.EgitimProgramlari.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Henüz eğitim programı bulunmamaktadır.</p>
+                    @if (isYetkili)
+                    {
+                        <a href="@Url.Action("Create", "EgitimProgram")" class="btn btn-primary">İlk Programı Oluştur</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Eğitim Şablonu</th>
+                                <th>Dershane</th>
+                                <th>Eğitim Tipi</th>
+                                <th>Başlangıç</th>
+                                <th>Bitiş</th>
+                                <th>Öğretmen</th>
+                                <th>Onay Durumu</th>
+                                <th>Katılımcı Sayısı</th>
+                                <th>Oluşturan</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var program in Model.EgitimProgramlari)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@program.EgitimSablon?.Ad</strong>
+                                    </td>
+                                    <td>@program.EgitimSablon?.Dershane?.Ad</td>
+                                    <td>@program.EgitimSablon?.EgitimTip?.Ad</td>
+                                    <td>@program.BasTar?.ToString("dd.MM.yyyy")</td>
+                                    <td>@program.BitTar?.ToString("dd.MM.yyyy")</td>
+                                    <td>@(program.Ogretmen?.Adlar ?? "Atanmadı")</td>
+                                    <td>
+                                        @if (program.Onayli == 1)
+                                        {
+                                            <span class="badge bg-success">Onaylı</span>
+                                        }
+                                        else if (program.Onayli == 0)
+                                        {
+                                            <span class="badge bg-danger">Reddedildi</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning">Beklemede</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">@program.Katilimcilar?.Count</span>
+                                    </td>
+                                    <td>@(program.Yaratan?.Adlar ?? "Bilinmiyor")</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="@Url.Action("Details", "EgitimProgram", new { id = program.Id })"
+                                               class="btn btn-outline-info" title="Detay">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            @if (isYetkili)
+                                            {
+                                                <a href="@Url.Action("Edit", "EgitimProgram", new { id = program.Id })"
+                                                   class="btn btn-outline-primary" title="Düzenle">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <!-- YENİ BUTON: Personel Ekle -->
+                                                <a href="@Url.Action("Index", "Egitilen", new { egitimProgramId = program.Id })"
+                                                   class="btn btn-outline-success" title="Personel Ekle">
+                                                    <i class="bi bi-person-plus"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

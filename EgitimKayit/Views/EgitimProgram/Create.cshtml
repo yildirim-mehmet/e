@@ -1,0 +1,97 @@
+﻿@model EgitimKayit.ViewModels.EgitimProgramViewModel
+
+@{
+    ViewData["Title"] = "Yeni Eğitim Programı";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYetkili = currentUserTip == "talepci" || currentUserTip == "ogretmen" ||
+                   currentUserTip == "sorumlu" || currentUserTip == "yonetici";
+}
+
+@if (!isYetkili)
+{
+    <div class="alert alert-danger">
+        Bu işlem için yetkiniz yok.
+    </div>
+    return;
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Yeni Eğitim Programı Oluştur</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="EsId" class="form-label"></label>
+                                <select asp-for="EsId" class="form-select">
+                                    <option value="">Eğitim Şablonu Seçiniz</option>
+                                    @foreach (var sablon in Model.EgitimSablonlari ?? new List<EgitimSablon>())
+                                    {
+                                        <option value="@sablon.Id">
+                                            @sablon.Ad - @sablon.Dershane?.Ad - @sablon.EgitimTip?.Ad
+                                        </option>
+                                    }
+                                </select>
+                                <span asp-validation-for="EsId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="PerTc" class="form-label"></label>
+                                <select asp-for="PerTc" class="form-select">
+                                    <option value="">Öğretmen Seçiniz (Opsiyonel)</option>
+                                    @foreach (var ogretmen in Model.Ogretmenler ?? new List<Personel>())
+                                    {
+                                        <option value="@ogretmen.Tc">@ogretmen.Adlar</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="PerTc" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="BasTar" class="form-label"></label>
+                                <input asp-for="BasTar" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="BasTar" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="BitTar" class="form-label"></label>
+                                <input asp-for="BitTar" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="BitTar" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Aciklama" class="form-label"></label>
+                                <textarea asp-for="Aciklama" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="Aciklama" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Oluştur</button>
+                                <a href="@Url.Action("Index")" class="btn btn-secondary">İptal</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

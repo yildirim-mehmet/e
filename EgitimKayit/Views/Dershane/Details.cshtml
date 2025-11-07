@@ -1,0 +1,137 @@
+﻿@model EgitimKayit.Models.Dershane
+
+@{
+    ViewData["Title"] = "Dershane Detayları";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYonetici = currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Dershane Detayları</h2>
+        <div>
+            <a href="@Url.Action("Index", "Dershane")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Listeye Dön
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Dershane Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Dershane Adı:</dt>
+                        <dd class="col-sm-9"><strong>@Model.Ad</strong></dd>
+
+                        <dt class="col-sm-3">Açıklama:</dt>
+                        <dd class="col-sm-9">@Model.Aciklama</dd>
+
+                        <dt class="col-sm-3">Eğitim Tip Sayısı:</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge bg-info">@Model.EgitimTipleri?.Count</span>
+                        </dd>
+
+                        <dt class="col-sm-3">Durum:</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge @(Model.Durum == 1 ? "bg-success" : "bg-danger")">
+                                @(Model.Durum == 1 ? "Aktif" : "Pasif")
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Eğitim Tipleri -->
+            <div class="card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Eğitim Tipleri</h5>
+                    @if (isYonetici)
+                    {
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="bi bi-plus"></i> Eğitim Tipi Ekle
+                        </a>
+                    }
+                </div>
+                <div class="card-body">
+                    @if (Model.EgitimTipleri == null || !Model.EgitimTipleri.Any())
+                    {
+                        <p class="text-muted">Bu dershaneye ait eğitim tipi bulunmamaktadır.</p>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var egitimTip in Model.EgitimTipleri)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">@egitimTip.Ad</h6>
+                                        <small class="text-muted">Oluşturulma: @egitimTip.Tarih?.ToString("dd.MM.yyyy")</small>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="#" class="btn btn-outline-info btn-sm">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        @if (isYonetici)
+                                        {
+                                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">İşlemler</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        @if (isYonetici)
+                        {
+                            <a href="@Url.Action("Edit", "Dershane", new { id = Model.Id })"
+                               class="btn btn-primary">
+                                <i class="bi bi-pencil"></i> Dershaneyi Düzenle
+                            </a>
+                            <form asp-action="Delete" method="post" class="d-grid">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Bu dershaneyi silmek istediğinizden emin misiniz?')">
+                                    <i class="bi bi-trash"></i> Dershaneyi Sil
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Sistem Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <dl>
+                        <dt>Oluşturan:</dt>
+                        <dd>@Model.Yaratan?.Adlar</dd>
+
+                        <dt>Oluşturulma Tarihi:</dt>
+                        <dd>@Model.Tarih?.ToString("dd.MM.yyyy HH:mm")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

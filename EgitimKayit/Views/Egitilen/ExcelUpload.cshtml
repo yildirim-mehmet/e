@@ -1,0 +1,96 @@
+﻿@model EgitimKayit.ViewModels.ExcelUploadViewModel
+
+@{
+    ViewData["Title"] = "Excel'den Katılımcı Yükle";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Excel'den Katılımcı Yükle</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h6><i class="bi bi-info-circle"></i> Excel Formatı</h6>
+                        <ul class="mb-0">
+                            <li>Excel dosyasının ilk sütununda TC Kimlik No'ları bulunmalıdır</li>
+                            <li>TC'ler 11 haneli olmalıdır</li>
+                            <li>Mevcut personel TC'leri kullanılmalıdır</li>
+                        </ul>
+                    </div>
+
+                    <form asp-action="ExcelUpload" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="EgitimProgramId" />
+
+                        <div class="mb-3">
+                            <label asp-for="ExcelFile" class="form-label"></label>
+                            <input asp-for="ExcelFile" class="form-control" accept=".xlsx,.xls" />
+                            <span asp-validation-for="ExcelFile" class="text-danger"></span>
+                            <div class="form-text">Sadece .xlsx ve .xls formatları desteklenmektedir.</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input asp-for="FirstRowIsHeader" class="form-check-input" />
+                            <label asp-for="FirstRowIsHeader" class="form-check-label"></label>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-upload"></i> Excel'i Yükle
+                            </button>
+                            <a href="@Url.Action("Index", new { egitimProgramId = Model.EgitimProgramId })"
+                               class="btn btn-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Örnek Excel -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Örnek Excel Formatı</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>TC Kimlik No</th>
+                                    <th>Ad Soyad (Opsiyonel)</th>
+                                    <th>Statü (Opsiyonel)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12345678901</td>
+                                    <td>Ahmet Yılmaz</td>
+                                    <td>Öğretmen</td>
+                                </tr>
+                                <tr>
+                                    <td>98765432109</td>
+                                    <td>Ayşe Demir</td>
+                                    <td>Öğrenci</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="@Url.Action("DownloadTemplate", "Egitilen", new { egitimProgramId = Model.EgitimProgramId })"
+                           class="btn btn-outline-success">
+                            <i class="bi bi-download"></i> Şablon Excel İndir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

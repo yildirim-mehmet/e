@@ -1,0 +1,205 @@
+﻿@model EgitimKayit.ViewModels.CreateUserViewModel
+
+@{
+    ViewData["Title"] = "Yeni Kullanıcı Oluştur";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Yeni Kullanıcı Oluştur</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Başarı Mesajı -->
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+
+                    <form asp-action="CreateUser" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Temel Bilgiler -->
+                        <h5 class="mb-3">Temel Bilgiler</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Tc" class="form-label"></label>
+                                <input asp-for="Tc" class="form-control" />
+                                <span asp-validation-for="Tc" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Adlar" class="form-label"></label>
+                                <input asp-for="Adlar" class="form-control" />
+                                <span asp-validation-for="Adlar" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Sifre" class="form-label"></label>
+                                <input asp-for="Sifre" type="password" class="form-control" />
+                                <span asp-validation-for="Sifre" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ConfirmPassword" class="form-label"></label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Kullanıcı Tipi (Sadece sorumlu/yonetici görebilir) -->
+                        @{
+                            var currentUserTip = Context.Session.GetString("PersonelTip");
+                        }
+                        @if (currentUserTip == "sorumlu" || currentUserTip == "yonetici")
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label asp-for="Tip" class="form-label"></label>
+                                    <select asp-for="Tip" class="form-select">
+                                        <option value="ogrenci">Öğrenci</option>
+                                        <option value="ogretmen">Öğretmen</option>
+                                        <option value="talepci">Talepçi</option>
+                                        <option value="sorumlu">Sorumlu</option>
+                                        @if (currentUserTip == "yonetici")
+                                        {
+                                            <option value="yonetici">Yönetici</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="hidden" asp-for="Tip" value="ogrenci" />
+                        }
+
+                        <!-- Statü ve Diğer Bilgiler -->
+                        <h5 class="mb-3 mt-4">Ek Bilgiler</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="StatuId" class="form-label"></label>
+                                <select asp-for="StatuId" class="form-select">
+                                    <option value="">Seçiniz...</option>
+                                    @foreach (var statu in Model.StatuList ?? new List<Statu>())
+                                    {
+                                        <option value="@statu.StatuDeger">@statu.Anlam</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Kuvvet" class="form-label"></label>
+                                <select asp-for="Kuvvet" class="form-select">
+                                    <option value="">Seçiniz...</option>
+                                    <option value="Deniz Yolu">Deniz Yolu</option>
+                                    <option value="Kara YOLU">Kara YOLU</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Sinif" class="form-label"></label>
+                                <input asp-for="Sinif" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Sicil" class="form-label"></label>
+                                <input asp-for="Sicil" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ResimDosya" class="form-label"></label>
+                                <input type="file" asp-for="ResimDosya" class="form-control" accept="image/*" />
+                            </div>
+                        </div>
+
+                        <!-- Birim Bilgileri -->
+                        <h5 class="mb-3 mt-4">Birim Bilgileri</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Birim1Id" class="form-label"></label>
+                                <select asp-for="Birim1Id" id="Birim1" class="form-select">
+                                    <option value="">Seçiniz...</option>
+                                    @foreach (var birim in Model.Birim1List ?? new List<Birim>())
+                                    {
+                                        <option value="@birim.Id">@birim.Ad</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Birim2Id" class="form-label"></label>
+                                <select asp-for="Birim2Id" id="Birim2" class="form-select">
+                                    <option value="">Önce Birim 1 seçiniz</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Birim3Id" class="form-label"></label>
+                                <select asp-for="Birim3Id" id="Birim3" class="form-select">
+                                    <option value="">Önce Birim 2 seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Butonlar -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Kullanıcı Oluştur</button>
+                                <a href="@Url.Action("Login", "Account")" class="btn btn-secondary">Giriş Sayfasına Dön</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            // Birim 1 değişince Birim 2'yi yükle
+            $('#Birim1').change(function () {
+                var ustId = $(this).val();
+                $('#Birim2').html('<option value="">Yükleniyor...</option>');
+                $('#Birim3').html('<option value="">Önce Birim 2 seçiniz</option>');
+
+                if (ustId) {
+                    $.getJSON('@Url.Action("GetBirim2", "Account")', { ustId: ustId }, function (data) {
+                        $('#Birim2').html('<option value="">Seçiniz...</option>');
+                        $.each(data, function (index, item) {
+                            $('#Birim2').append($('<option>', {
+                                value: item.id,
+                                text: item.ad
+                            }));
+                        });
+                    });
+                }
+            });
+
+            // Birim 2 değişince Birim 3'ü yükle
+            $('#Birim2').change(function () {
+                var ustId = $(this).val();
+                $('#Birim3').html('<option value="">Yükleniyor...</option>');
+
+                if (ustId) {
+                    $.getJSON('@Url.Action("GetBirim3", "Account")', { ustId: ustId }, function (data) {
+                        $('#Birim3').html('<option value="">Seçiniz...</option>');
+                        $.each(data, function (index, item) {
+                            $('#Birim3').append($('<option>', {
+                                value: item.id,
+                                text: item.ad
+                            }));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}

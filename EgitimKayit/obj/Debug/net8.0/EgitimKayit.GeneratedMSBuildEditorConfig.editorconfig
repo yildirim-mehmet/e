@@ -1,0 +1,189 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EgitimKayit
+build_property.RootNamespace = EgitimKayit
+build_property.ProjectDir = E:\MEHMET\egitim\EgitimKayit_06112025_1705\EgitimKayit\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\MEHMET\egitim\EgitimKayit_06112025_1705\EgitimKayit
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Account/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGVVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Dershane/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVyc2hhbmVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Dershane/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVyc2hhbmVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Dershane/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVyc2hhbmVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Dershane/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVyc2hhbmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Dershane/Tip.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVyc2hhbmVcVGlwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitilen/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGlsZW5cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitilen/CreateMultiple.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGlsZW5cQ3JlYXRlTXVsdGlwbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitilen/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGlsZW5cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitilen/ExcelUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGlsZW5cRXhjZWxVcGxvYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitilen/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGlsZW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimProgram/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltUHJvZ3JhbVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimProgram/CreateMultiple.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltUHJvZ3JhbVxDcmVhdGVNdWx0aXBsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimProgram/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltUHJvZ3JhbVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimProgram/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltUHJvZ3JhbVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimProgram/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltUHJvZ3JhbVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimSablon/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltU2FibG9uXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimSablon/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltU2FibG9uXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimSablon/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltU2FibG9uXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimSablon/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltU2FibG9uXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimTip/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltVGlwXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimTip/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltVGlwXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimTip/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltVGlwXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/EgitimTip/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltVGlwXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitim/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Egitim/Yeni.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWdpdGltXFllbmkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Home/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/User/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/User/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/User/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Yetki/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWWV0a2lcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Yetki/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWWV0a2lcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/MEHMET/egitim/EgitimKayit_06112025_1705/EgitimKayit/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-4z6jx3eqzb

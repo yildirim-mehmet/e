@@ -1,0 +1,119 @@
+﻿@model EgitimKayit.ViewModels.EgitimSablonViewModel
+
+@{
+    ViewData["Title"] = "Eğitim Şablonu Düzenle";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Eğitim Şablonu Düzenle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Ad" class="form-label"></label>
+                                <input asp-for="Ad" class="form-control" />
+                                <span asp-validation-for="Ad" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="DerId" class="form-label"></label>
+                                <select asp-for="DerId" class="form-select" id="dershaneSelect">
+                                    <option value="">Dershane Seçiniz</option>
+                                    @foreach (var dershane in Model.Dershaneler ?? new List<Dershane>())
+                                    {
+                                        <option value="@dershane.Id" selected="@(dershane.Id == Model.DerId)">
+                                            @dershane.Ad
+                                        </option>
+                                    }
+                                </select>
+                                <span asp-validation-for="DerId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EtId" class="form-label"></label>
+                                <select asp-for="EtId" class="form-select" id="egitimTipSelect">
+                                    <option value="">Eğitim Tipi Seçiniz</option>
+                                    @foreach (var egitimTip in Model.EgitimTipleri ?? new List<EgitimTip>())
+                                    {
+                                        <option value="@egitimTip.Id" selected="@(egitimTip.Id == Model.EtId)">
+                                            @egitimTip.Ad
+                                        </option>
+                                    }
+                                </select>
+                                <span asp-validation-for="EtId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label asp-for="Aciklama" class="form-label"></label>
+                                <textarea asp-for="Aciklama" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="Aciklama" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Güncelle</button>
+                                <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-secondary">İptal</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Dershane seçildiğinde eğitim tiplerini yükle
+            $('#dershaneSelect').change(function() {
+                var dershaneId = $(this).val();
+                var egitimTipSelect = $('#egitimTipSelect');
+
+                egitimTipSelect.empty();
+
+                if (dershaneId) {
+                    egitimTipSelect.append('<option value="">Yükleniyor...</option>');
+
+                    $.getJSON('@Url.Action("GetEgitimTipleriByDershane", "EgitimSablon")', { dershaneId: dershaneId })
+                        .done(function(data) {
+                            egitimTipSelect.empty();
+                            egitimTipSelect.append('<option value="">Eğitim Tipi Seçiniz</option>');
+
+                            $.each(data, function(index, item) {
+                                var selected = item.id == @Model.EtId ? 'selected' : '';
+                                egitimTipSelect.append('<option value="' + item.id + '" ' + selected + '>' + item.ad + '</option>');
+                            });
+                        })
+                        .fail(function() {
+                            egitimTipSelect.empty();
+                            egitimTipSelect.append('<option value="">Yükleme hatası</option>');
+                        });
+                } else {
+                    egitimTipSelect.append('<option value="">Önce Dershane Seçiniz</option>');
+                }
+            });
+
+            // Sayfa yüklendiğinde eğer dershane seçiliyse eğitim tiplerini yükle
+            if ($('#dershaneSelect').val()) {
+                $('#dershaneSelect').trigger('change');
+            }
+        });
+    </script>
+}

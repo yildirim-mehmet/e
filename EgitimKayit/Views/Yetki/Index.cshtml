@@ -1,0 +1,129 @@
+﻿@model EgitimKayit.ViewModels.YetkiIndexViewModel
+
+@{
+    ViewData["Title"] = "Yetki Yönetimi";
+    var currentUserTip = Context.Session.GetString("PersonelTip");
+    var isYetkili = currentUserTip == "sorumlu" || currentUserTip == "yonetici";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Yetki Yönetimi</h2>
+        @if (isYetkili)
+        {
+            <a href="@Url.Action("Create", "Yetki")" class="btn btn-primary">
+                <i class="bi bi-person-check"></i> Yetki Ata
+            </a>
+        }
+    </div>
+
+    <!-- Mesajlar -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Filtre -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filtrele</h5>
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Dershane</label>
+                    <select name="dershaneId" class="form-select" onchange="this.form.submit()">
+                        <option value="">Tüm Dershaneler</option>
+                        @foreach (var dershane in Model.Dershaneler)
+                        {
+                            <option value="@dershane.Id" selected="@(Model.SeciliDershaneId == dershane.Id)">
+                                @dershane.Ad
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Filtreyi Temizle</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Yetki Listesi -->
+    <div class="card">
+        <div class="card-body">
+            @if (!Model.Yetkiler.Any())
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Henüz yetki ataması bulunmamaktadır.</p>
+                    @if (isYetkili)
+                    {
+                        <a href="@Url.Action("Create", "Yetki")" class="btn btn-primary">İlk Yetki Atamasını Yap</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Personel</th>
+                                <th>TC</th>
+                                <th>Tip</th>
+                                <th>Dershane</th>
+                                <th>Atayan</th>
+                                <th>Atama Tarihi</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var yetki in Model.Yetkiler)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@yetki.Personel?.Adlar</strong>
+                                    </td>
+                                    <td>@yetki.PerTc</td>
+                                    <td>
+                                        <span class="badge
+                                                    @(yetki.Personel?.Tip == "yonetici" ? "bg-danger" :
+                                                                                            yetki.Personel?.Tip == "sorumlu" ? "bg-warning" :
+                                                                                            yetki.Personel?.Tip == "ogretmen" ? "bg-info" : "bg-secondary")">
+                                    @yetki.Personel?.Tip
+                                </span>
+                            </td>
+                            <td>@yetki.Dershane?.Ad</td>
+                            <td>@yetki.Yaratan?.Adlar</td>
+                            <td>@yetki.Tarih?.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>
+                                @if (isYetkili)
+                                        {
+                                            <form asp-action="Delete" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="@yetki.Id" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                        title="Yetkiyi Kaldır"
+                                                        onclick="return confirm('Bu yetkiyi kaldırmak istediğinizden emin misiniz?')">
+                                                    <i class="bi bi-person-dash"></i> Kaldır
+                                                </button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

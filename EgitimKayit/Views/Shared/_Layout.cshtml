@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EgitimKayit</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EgitimKayit.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EgitimKayit</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!-- Ana Menü Öğeleri -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">1Ana Sayfa</a>
+                        </li>
+
+                        
+                        <!-- giriş adminse dershane yönetimi -->
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("PersonelTc")))
+                        {
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="@Url.Action("Dashboard", "Home")">3Dashboard</a>
+                                </li>
+
+                                @if (Context.Session.GetString("PersonelTip") == "sorumlu" ||
+                                                            Context.Session.GetString("PersonelTip") == "yonetici")
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                                            Yönetim
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("Index", "User")">
+                                                    <i class="bi bi-people"></i> Kullanıcı Yönetimi
+                                                </a>
+                                            </li>
+                                            @if (Context.Session.GetString("PersonelTip") == "yonetici")
+                                            {
+                                                <li>
+                                                    <a class="dropdown-item" href="@Url.Action("Index", "Dershane")">
+                                                        <i class="bi bi-building"></i> Dershane Yönetimi
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="@Url.Action("Index", "EgitimTip")">
+                                                        <i class="bi bi-list-check"></i> Eğitim Tipi Yönetimi
+                                                    </a>
+                                                </li>
+                                            }
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("Index", "Yetki")">
+                                                    <i class="bi bi-person-check"></i> Yetki Yönetimi
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                <!-- Öğrenci dışındaki kullanıcılar için Eğitim menüsü -->
+                                @if (Context.Session.GetString("PersonelTip") != "ogrenci")
+                                {
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                                            Eğitim İşlemleri
+                                        </a>
+                                        <ul class="dropdown-menu">
+
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("Index", "EgitimSablon")">
+                                                    <i class="bi bi-person-check"></i> Eğitim Şablon Yönetimi
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("Index", "EgitimProgram")">
+                                                    <i class="bi bi-person-check"></i> Programlanan Egitim Yönetimi
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("create", "EgitimSablon")">
+                                                    <i class="bi bi-person-check"></i> Yeni Eğitim Şablonu
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="@Url.Action("create", "EgitimProgram")">
+                                                    <i class="bi bi-person-check"></i> Yeni Eğitim Programı
+                                                </a>
+                                            </li>
+
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="#">Raporlar</a></li>
+                                        </ul>
+                                    </li>
+                                }
+                                @* 
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="@Url.Action("ChangePassword", "Account")">Şifre Değiştir</a>
+                                </li> *@
+                            </ul>
+                        }
+
+
+
+
+
+                        <!-- Her zaman görünecek menüler -->
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">7Gizlilik</a>
+                        </li> *@
+
+                        @if (string.IsNullOrEmpty(Context.Session.GetString("PersonelTc")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="CreateUser">Kayıt Ol</a>
+                            </li>
+                        }
+
+                    </ul>
+
+                    <!-- Sağ üst kullanıcı bilgisi -->
+                    <ul class="navbar-nav">
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("PersonelTc")))
+                        {
+
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="@Url.Action("ChangePassword", "Account")">Şifre Değiştir</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Çıkış</a>
+                            </li>
+                            <li class="nav-item">
+                                |
+                            </li>
+                            <li class="nav-item">
+                                <span class="navbar-text text-dark me-3">
+                                    <strong>@Context.Session.GetString("PersonelAd")</strong>
+                                    <small class="text-muted">[@Context.Session.GetString("PersonelTip")]</small>
+                                </span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            <!-- Başarı mesajları -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <!-- Hata mesajları -->
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - EgitimKayit - <a asp-area="" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
+        </div>
+    </footer>
+
+    <!-- Mevcut JS dosyalarınız korunuyor -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

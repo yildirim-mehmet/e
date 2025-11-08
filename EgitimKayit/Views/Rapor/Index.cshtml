@@ -1,0 +1,120 @@
+﻿@model EgitimKayit.ViewModels.RaporFilterViewModel
+@{
+    ViewData["Title"] = "Eğitim Raporlama";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-4 mb-4">Eğitim Raporlama Sistemi</h1>
+    </div>
+</div>
+
+<form asp-action="RaporCikar" method="post" class="card shadow p-4 mb-5">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+
+        <div class="col-md-6 border-end">
+            <h5 class="mb-3 text-primary">Tarih Filtreleri</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="BaslangicTarihi" class="form-label"></label>
+                    <input asp-for="BaslangicTarihi" type="date" class="form-control" />
+                    <span asp-validation-for="BaslangicTarihi" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="BitisTarihi" class="form-label"></label>
+                    <input asp-for="BitisTarihi" type="date" class="form-control" />
+                    <span asp-validation-for="BitisTarihi" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" asp-for="EgitimProgramTarihKullan" id="ep_tarih_kullan">
+                <label class="form-check-label" for="ep_tarih_kullan">
+                    @Html.DisplayNameFor(model => model.EgitimProgramTarihKullan)
+                </label>
+            </div>
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" asp-for="EgitilenTarihKullan" id="egitilen_tarih_kullan">
+                <label class="form-check-label" for="egitilen_tarih_kullan">
+                    @Html.DisplayNameFor(model => model.EgitilenTarihKullan)
+                </label>
+            </div>
+
+            <h5 class="mb-3 text-primary">Durum Filtresi</h5>
+            <div class="mb-3">
+                <label asp-for="Durum" class="form-label"></label>
+                <select asp-for="Durum" class="form-select">
+                    <option value="">Tümü</option>
+                    <option value="1">Tamamlandı</option>
+                    <option value="0">Devam Ediyor / Yapılmadı</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h5 class="mb-3 text-success">Eğitim Filtreleri</h5>
+            <div class="mb-3">
+                <label asp-for="EgitimSablonId" class="form-label"></label>
+                <select asp-for="EgitimSablonId" class="form-select" asp-items="@(new SelectList(Model.EgitimSablonlari, "Id", "Ad"))">
+                    <option value="">Tümü</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EgitimTipId" class="form-label"></label>
+                <select asp-for="EgitimTipId" class="form-select" asp-items="@(new SelectList(Model.EgitimTipleri, "Id", "Ad"))">
+                    <option value="">Tümü</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label asp-for="DershaneId" class="form-label"></label>
+                <select asp-for="DershaneId" class="form-select" asp-items="@(new SelectList(Model.Dershaneler, "Id", "Ad"))">
+                    <option value="">Tümü</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-3">
+            <label asp-for="Birim1" class="form-label"></label>
+            <select asp-for="Birim1" class="form-select" asp-items="@(new SelectList(Model.Birim1List))">
+                <option value="">Tümü</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Birim2" class="form-label"></label>
+            <select asp-for="Birim2" class="form-select" asp-items="@(new SelectList(Model.Birim2List))">
+                <option value="">Tümü</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Birim3" class="form-label"></label>
+            <select asp-for="Birim3" class="form-select" asp-items="@(new SelectList(Model.Birim3List))">
+                <option value="">Tümü</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="PersonelTip" class="form-label"></label>
+            <select asp-for="PersonelTip" class="form-select" asp-items="@(new SelectList(Model.PersonelTipleri))">
+                <option value="">Tümü</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-file-earmark-spreadsheet"></i> Raporu Excel Olarak İndir
+        </button>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

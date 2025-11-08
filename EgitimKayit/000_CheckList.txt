@@ -1,2 +1,4 @@
 ekranýnda onaylý ve dk deüeri deðiþtirilsin https://localhost:7116/Egitilen?egitimProgramId=3
-excekl toplu yükleme düznlensin
++ excekl toplu yükleme düznlensin **
+
+

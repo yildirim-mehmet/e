@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Drawing;
 using ClosedXML.Excel; // ClosedXML için
+using System.Globalization;
+
 
 namespace EgitimKayit.Controllers
 {
@@ -70,6 +72,42 @@ namespace EgitimKayit.Controllers
 
             return View(model);
         }
+
+
+        // eğitilen listesi dk yapıldı güncelleme
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SatirKaydet([FromBody] EgitilenSatirViewModel model)
+        {
+            if (model == null || model.Id <= 0)
+                return Json(new { success = false, message = "Geçersiz veri gönderildi." });
+
+            var kayit = await _context.Egitilen.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+            if (kayit == null)
+                return Json(new { success = false, message = "Kayıt bulunamadı." });
+
+            // Güncelle
+            kayit.Dk = model.Dk ?? 0;
+            kayit.Yapildi = model.Yapildi ? 1 : 0;
+           // kayit.gu = DateTime.Now;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Json(new
+                {
+                    success = true,
+                    message = $"{kayit.Dk} dk kaydedildi"
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Kaydedilirken hata oluştu: " + ex.Message });
+            }
+        }
+
+
         #endregion
 
         #region Personel Ekleme - GET
@@ -193,40 +231,7 @@ namespace EgitimKayit.Controllers
             }
         }
         #endregion
-        //public async Task<IActionResult> Create(int egitimProgramId)
-        //{
-        //    // Yetki kontrolü - talepçi ve üstü yetkililer
-        //    var currentUserTip = HttpContext.Session.GetString("PersonelTip");
-        //    if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
-        //        currentUserTip != "sorumlu" && currentUserTip != "yonetici")
-        //    {
-        //        TempData["ErrorMessage"] = "Bu işlem için yetkiniz yok.";
-        //        return RedirectToAction("Index", "EgitimProgram");
-        //    }
-
-        //    var egitimProgram = await _context.EgitimProgram
-        //        .Include(ep => ep.EgitimSablon)
-        //        .FirstOrDefaultAsync(ep => ep.Id == egitimProgramId);
-
-        //    if (egitimProgram == null)
-        //    {
-        //        TempData["ErrorMessage"] = "Eğitim programı bulunamadı.";
-        //        return RedirectToAction("Index", "EgitimProgram");
-        //    }
-
-        //    var personeller = await _context.Personel
-        //        .Where(p => p.Aktif == 1)
-        //        .OrderBy(p => p.Adlar)
-        //        .ToListAsync();
-
-        //    var model = new EgitilenViewModel
-        //    {
-        //        EgtProgId = egitimProgramId,
-        //        Personeller = personeller
-        //    };
-
-        //    return View(model);
-        //}
+        
         #endregion
 
         #region Personel Ekleme - POST
@@ -318,71 +323,79 @@ namespace EgitimKayit.Controllers
 
         //using ClosedXML.Excel; // ClosedXML için
 
-#region Excel Yükleme - GET
-[HttpGet]
-    public IActionResult ExcelUpload(int egitimProgramId)
-    {
-        // Yetki kontrolü - talepçi ve üstü yetkililer
-        var currentUserTip = HttpContext.Session.GetString("PersonelTip");
-        if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
-            currentUserTip != "sorumlu" && currentUserTip != "yonetici")
-        {
-            TempData["ErrorMessage"] = "Bu işlem için yetkiniz yok.";
-            return RedirectToAction("Index", "EgitimProgram");
-        }
 
-        var model = new ExcelUploadViewModel
-        {
-            EgitimProgramId = egitimProgramId
-        };
 
-        return View(model);
-    }
-    #endregion
+    //Excel yükleme
 
-    #region Excel Yükleme - POST
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ExcelUpload(ExcelUploadViewModel model)
-    {
-        // Yetki kontrolü - talepçi ve üstü yetkililer
-        var currentUserTip = HttpContext.Session.GetString("PersonelTip");
-        if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
-            currentUserTip != "sorumlu" && currentUserTip != "yonetici")
-        {
-            TempData["ErrorMessage"] = "Bu işlem için yetkiniz yok.";
-            return RedirectToAction("Index", "EgitimProgram");
-        }
+    //Excel yükleme
+    //#region Excel Yükleme - GET
+    //[HttpGet]
+    //public IActionResult ExcelUpload(int egitimProgramId)
+    //{
+    //    // Yetki kontrolü - talepçi ve üstü yetkililer
+    //    var currentUserTip = HttpContext.Session.GetString("PersonelTip");
+    //    if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
+    //        currentUserTip != "sorumlu" && currentUserTip != "yonetici")
+    //    {
+    //        TempData["ErrorMessage"] = "Bu işlem için yetkiniz yok.";
+    //        return RedirectToAction("Index", "EgitimProgram");
+    //    }
 
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
+    //    var model = new ExcelUploadViewModel
+    //    {
+    //        EgitimProgramId = egitimProgramId
+    //    };
 
-        try
-        {
-            // Excel dosyasını işle
-            var result = await ProcessExcelFile(model.ExcelFile, model.EgitimProgramId, model.FirstRowIsHeader);
+    //    return View(model);
+    //}
+    //#endregion
 
-            if (result.Success)
-            {
-                TempData["SuccessMessage"] = $"Excel dosyası başarıyla işlendi. {result.AddedCount} yeni kayıt eklendi.";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = $"Excel işleme hatası: {result.ErrorMessage}";
-            }
+    //#region Excel Yükleme - POST
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public async Task<IActionResult> ExcelUpload(ExcelUploadViewModel model)
+    //{
+    //    // Yetki kontrolü - talepçi ve üstü yetkililer
+    //    var currentUserTip = HttpContext.Session.GetString("PersonelTip");
+    //    if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
+    //        currentUserTip != "sorumlu" && currentUserTip != "yonetici")
+    //    {
+    //        TempData["ErrorMessage"] = "Bu işlem için yetkiniz yok.";
+    //        return RedirectToAction("Index", "EgitimProgram");
+    //    }
 
-            return RedirectToAction("Index", new { egitimProgramId = model.EgitimProgramId });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Excel yükleme hatası - ProgramId: {EgitimProgramId}", model.EgitimProgramId);
-            TempData["ErrorMessage"] = "Excel dosyası yüklenirken hata oluştu: " + ex.Message;
-            return View(model);
-        }
-    }
-    #endregion
+    //    if (!ModelState.IsValid)
+    //    {
+    //        return View(model);
+    //    }
+
+    //    try
+    //    {
+    //        // Excel dosyasını işle
+    //        var result = await ProcessExcelFile(model.ExcelFile, model.EgitimProgramId, model.FirstRowIsHeader);
+
+    //        if (result.Success)
+    //        {
+    //            TempData["SuccessMessage"] = $"Excel dosyası başarıyla işlendi. {result.AddedCount} yeni kayıt eklendi.";
+    //        }
+    //        else
+    //        {
+    //            TempData["ErrorMessage"] = $"Excel işleme hatası: {result.ErrorMessage}";
+    //        }
+
+    //        return RedirectToAction("Index", new { egitimProgramId = model.EgitimProgramId });
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "Excel yükleme hatası - ProgramId: {EgitimProgramId}", model.EgitimProgramId);
+    //        TempData["ErrorMessage"] = "Excel dosyası yüklenirken hata oluştu: " + ex.Message;
+    //        return View(model);
+    //    }
+    //}
+    //#endregion
+
+
+
 
     #region Excel'e Aktar
     [HttpGet]
@@ -481,68 +494,72 @@ namespace EgitimKayit.Controllers
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             fileName);
     }
-    #endregion
+        #endregion
 
-    #region Excel İşleme Yardımcı Metodu (ClosedXML)
-    private async Task<(bool Success, int AddedCount, string ErrorMessage)> ProcessExcelFile(
-        IFormFile excelFile, int egitimProgramId, bool firstRowIsHeader)
-    {
-        var addedCount = 0;
-        var yaratanTc = HttpContext.Session.GetString("PersonelTc");
+        //#region Excel İşleme Yardımcı Metodu (ClosedXML)
+        //private async Task<(bool Success, int AddedCount, string ErrorMessage)> ProcessExcelFile(
+        //    IFormFile excelFile, int egitimProgramId, bool firstRowIsHeader)
+        //{
+        //    var addedCount = 0;
+        //    var yaratanTc = HttpContext.Session.GetString("PersonelTc");
 
-        using var stream = excelFile.OpenReadStream();
-        using var workbook = new XLWorkbook(stream);
-        var worksheet = workbook.Worksheet(1);
+        //    using var stream = excelFile.OpenReadStream();
+        //    using var workbook = new XLWorkbook(stream);
+        //    var worksheet = workbook.Worksheet(1);
 
-        var rows = worksheet.RangeUsed().RowsUsed();
-        var startRow = firstRowIsHeader ? 2 : 1;
+        //    var rows = worksheet.RangeUsed().RowsUsed();
+        //    var startRow = firstRowIsHeader ? 2 : 1;
 
-        for (int row = startRow; row <= rows.Count(); row++)
-        {
-            var tcCell = worksheet.Cell(row, 1).Value.ToString();
+        //    for (int row = startRow; row <= rows.Count(); row++)
+        //    {
+        //        var tcCell = worksheet.Cell(row, 1).Value.ToString();
 
-            if (string.IsNullOrEmpty(tcCell))
-                continue;
+        //        if (string.IsNullOrEmpty(tcCell))
+        //            continue;
 
-            // Personelin var olduğunu kontrol et
-            var personel = await _context.Personel
-                .FirstOrDefaultAsync(p => p.Tc == tcCell && p.Aktif == 1);
+        //        // Personelin var olduğunu kontrol et
+        //        var personel = await _context.Personel
+        //            .FirstOrDefaultAsync(p => p.Tc == tcCell && p.Aktif == 1);
 
-            if (personel == null)
-            {
-                _logger.LogWarning("Excel yükleme: TC {Tc} bulunamadı", tcCell);
-                continue;
-            }
+        //        if (personel == null)
+        //        {
+        //            _logger.LogWarning("Excel yükleme: TC {Tc} bulunamadı", tcCell);
+        //            continue;
+        //        }
 
-            // Aynı kişi aynı eğitim programına zaten eklenmiş mi kontrol et
-            if (!await _context.Egitilen.AnyAsync(e => e.PerTc == tcCell && e.EgtProgId == egitimProgramId))
-            {
-                var yeniEgitilen = new Egitilen
-                {
-                    PerTc = tcCell,
-                    EgtProgId = egitimProgramId,
-                    Dk = null,
-                    Yapildi = 0,
-                    YaratanTc = yaratanTc,
-                    Tarih = DateTime.Now
-                };
+        //        // Aynı kişi aynı eğitim programına zaten eklenmiş mi kontrol et
+        //        if (!await _context.Egitilen.AnyAsync(e => e.PerTc == tcCell && e.EgtProgId == egitimProgramId))
+        //        {
+        //            var yeniEgitilen = new Egitilen
+        //            {
+        //                PerTc = tcCell,
+        //                EgtProgId = egitimProgramId,
+        //                Dk = null,
+        //                Yapildi = 0,
+        //                YaratanTc = yaratanTc,
+        //                Tarih = DateTime.Now
+        //            };
 
-                _context.Egitilen.Add(yeniEgitilen);
-                addedCount++;
-            }
-        }
+        //            _context.Egitilen.Add(yeniEgitilen);
+        //            addedCount++;
+        //        }
+        //    }
 
-        await _context.SaveChangesAsync();
-        return (true, addedCount, "");
-    }
-    #endregion
+        //    await _context.SaveChangesAsync();
+        //    return (true, addedCount, "");
+        //}
+        //#endregion
 
 
 
-    [HttpGet]
+        #endregion
+
+        #region Toplu Personel Ekleme - POST
+
+
+        [HttpGet]
         public async Task<IActionResult> CreateMultiple(int egitimProgramId)
         {
-            // Yetki kontrolü - talepçi ve üstü yetkililer
             var currentUserTip = HttpContext.Session.GetString("PersonelTip");
             if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
                 currentUserTip != "sorumlu" && currentUserTip != "yonetici")
@@ -552,7 +569,13 @@ namespace EgitimKayit.Controllers
             }
 
             var egitimProgram = await _context.EgitimProgram
+                // 1. EgitimSablon'u yükle
                 .Include(ep => ep.EgitimSablon)
+                    // 2. EgitimSablon'un içindeki Dershane'yi yükle
+                    .ThenInclude(es => es.Dershane)
+                // 3. EgitimSablon'un içindeki EgitimTip'i yükle
+                .Include(ep => ep.EgitimSablon)
+                    .ThenInclude(es => es.EgitimTip)
                 .FirstOrDefaultAsync(ep => ep.Id == egitimProgramId);
 
             if (egitimProgram == null)
@@ -563,17 +586,17 @@ namespace EgitimKayit.Controllers
 
             var personeller = await _context.Personel
                 .Where(p => p.Aktif == 1)
+                .Include(p => p.StatuBilgi)
                 .OrderBy(p => p.Adlar)
                 .ToListAsync();
 
             ViewBag.EgitimProgram = egitimProgram;
             ViewBag.Personeller = personeller;
 
-            return View();
+            return View(egitimProgramId); // ✅ MODEL GÖNDER
         }
-        #endregion
 
-        #region Toplu Personel Ekleme - POST
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateMultiple(int egitimProgramId, List<string> selectedPersoneller)
@@ -607,6 +630,7 @@ namespace EgitimKayit.Controllers
                         {
                             PerTc = personelTc,
                             EgtProgId = egitimProgramId,
+
                             Dk = null,
                             Yapildi = 0,
                             YaratanTc = yaratanTc,
@@ -772,6 +796,203 @@ namespace EgitimKayit.Controllers
             }
         }
         #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+        // excel yükle
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExcelUpload(IFormFile ExcelFile, int EgitimProgramId, bool FirstRowIsHeader = true)
+        {
+            // yetki kontrolü (senin mevcut pattern'e uyacak şekilde)
+            var currentUserTip = HttpContext.Session.GetString("PersonelTip");
+            if (currentUserTip != "talepci" && currentUserTip != "ogretmen" &&
+                currentUserTip != "sorumlu" && currentUserTip != "yonetici")
+            {
+                TempData["ErrorMessage"] = "Bu işlem için yetkiniz yok.";
+                return RedirectToAction("Index", "EgitimProgram");
+            }
+
+            if (ExcelFile == null || ExcelFile.Length == 0)
+            {
+                TempData["ErrorMessage"] = "Lütfen bir Excel dosyası seçin.";
+                return RedirectToAction("Index", new { egitimProgramId = EgitimProgramId });
+            }
+
+            try
+            {
+                var result = await ProcessExcelFile(ExcelFile, EgitimProgramId, FirstRowIsHeader);
+
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = $"Excel işlendi. {result.AddedEgitilenCount} eğitim kaydı, {result.AddedPersonelCount} yeni personel eklendi.";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Excel işlenemedi: " + result.ErrorMessage;
+                }
+
+                return RedirectToAction("Index", new { egitimProgramId = EgitimProgramId });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Excel yükleme hatası - ProgramId: {EgitimProgramId}", EgitimProgramId);
+                TempData["ErrorMessage"] = "Excel dosyası yüklenirken hata oluştu: " + ex.Message;
+                return RedirectToAction("Index", new { egitimProgramId = EgitimProgramId });
+            }
+        }
+
+        private class ProcessResult
+        {
+            public bool Success { get; set; } = true;
+            public int AddedPersonelCount { get; set; } = 0;
+            public int AddedEgitilenCount { get; set; } = 0;
+            public string ErrorMessage { get; set; } = "";
+        }
+
+        private async Task<ProcessResult> ProcessExcelFile(IFormFile file, int egitimProgramId, bool firstRowIsHeader)
+        {
+            var result = new ProcessResult();
+
+            // Eğitim program bilgilerini al (BasTar, BitTar, Aciklama)
+            var egitimProgram = await _context.EgitimProgram
+                .FirstOrDefaultAsync(ep => ep.Id == egitimProgramId); // eğer farklı isimliyse düzelt
+
+            // Transaction ile sar
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                using var stream = file.OpenReadStream();
+                using var workbook = new XLWorkbook(stream);
+                var worksheet = workbook.Worksheets.First(); // ilk sheet
+                var lastRow = worksheet.LastRowUsed()?.RowNumber() ?? 0;
+                var startRow = firstRowIsHeader ? 2 : 1;
+
+                for (int row = startRow; row <= lastRow; row++)
+                {
+                    // Excel sütun sırası (senin onayladığın):
+                    // 1: TC, 2: Ad Soyad, 3: Statü(Anlam), 4: Birim1, 5: Birim2, 6: Birim3, 7: Dakika
+                    var tc = worksheet.Cell(row, 1).GetString()?.Trim();
+                    if (string.IsNullOrWhiteSpace(tc)) continue; // boş satır atla
+
+                    // normalize TC (istersen ekstra temizleme yap)
+                    tc = tc.Replace(" ", "");
+
+                    var adSoyad = worksheet.Cell(row, 2).GetString()?.Trim();
+                    var statüAnlam = worksheet.Cell(row, 3).GetString()?.Trim();
+                    var birim1 = worksheet.Cell(row, 4).GetString()?.Trim();
+                    var birim2 = worksheet.Cell(row, 5).GetString()?.Trim();
+                    var birim3 = worksheet.Cell(row, 6).GetString()?.Trim();
+                    var dakikaRaw = worksheet.Cell(row, 7).GetString()?.Trim();
+
+                    int dk = 0;
+                    if (!string.IsNullOrWhiteSpace(dakikaRaw))
+                    {
+                        // sayısal parse denemesi
+                        if (!int.TryParse(dakikaRaw, NumberStyles.Any, CultureInfo.InvariantCulture, out dk))
+                        {
+                            // hücre metin formatındaysa, virgül/nokta olanları da handle et
+                            var cleaned = dakikaRaw.Replace(",", ".").Split('.')[0];
+                            int.TryParse(cleaned, out dk);
+                        }
+                    }
+
+                    // --- Statü eşleştirme: Anlam => StatuDeger; bulunamazsa 999999 ---
+                    int statudeğer = 999999;
+                    if (!string.IsNullOrWhiteSpace(statüAnlam))
+                    {
+                        var statu = await _context.Set<Statu>()
+                            .FirstOrDefaultAsync(s => s.Anlam == statüAnlam);
+                        if (statu != null && statu.StatuDeger.HasValue)
+                        {
+                            statudeğer = statu.StatuDeger.Value;
+                        }
+                        else
+                        {
+                            // eşleşmezse kural gereği 999999 kullan (yeni Statu oluşturma yok)
+                            statudeğer = 999999;
+                        }
+                    }
+
+                    // --- Personel kontrol / oluşturma ---
+                    var personel = await _context.Personel
+                        .FirstOrDefaultAsync(p => p.Tc == tc && p.Aktif == 1);
+
+                    if (personel == null)
+                    {
+                        // Yeni personel yarat (Ad güncelleme yapılmayacak burada, sadece yaratıyorum)
+                        personel = new Personel
+                        {
+                            Tc = tc,
+                            Adlar = string.IsNullOrWhiteSpace(adSoyad) ? null : adSoyad,
+                            Statu = statudeğer,
+                            Birim1 = string.IsNullOrWhiteSpace(birim1) ? null : birim1,
+                            Birim2 = string.IsNullOrWhiteSpace(birim2) ? null : birim2,
+                            Birim3 = string.IsNullOrWhiteSpace(birim3) ? null : birim3,
+                            Tarih = DateTime.Now,
+                            YaratanTc = HttpContext.Session.GetString("PersonelTc"),
+                            Aktif = 1
+                        };
+
+                        _context.Personel.Add(personel);
+                        await _context.SaveChangesAsync(); // personel'i kaydet
+                        result.AddedPersonelCount++;
+                    }
+                    else
+                    {
+                        // Var olan personel için **isim veya birim güncelleme yapılmayacak** (senin isteğin)
+                        // Ancak eğer Statu boşsa veya farklıysa değiştirmek istersen burada ekleyebilirsin.
+                    }
+
+                    // --- Egitilen kaydı oluştur ---
+                    var egitilen = new Egitilen
+                    {
+                        PerTc = tc, // PersonelId yok; TC üzerinden ilişki
+                        EgtProgId = egitimProgramId,
+                        Dk = dk,
+                        BasTar = egitimProgram?.BasTar ?? DateTime.Now,
+                        BitTar = egitimProgram?.BitTar ?? DateTime.Now,
+                        Aciklama = egitimProgram?.Aciklama,
+                        Yapildi = 0,
+                        YaratanTc = HttpContext.Session.GetString("PersonelTc"),
+                        Tarih = DateTime.Now
+                    };
+
+                    _context.Egitilen.Add(egitilen);
+                    result.AddedEgitilenCount++;
+
+                    // ---- performans için: istersen belirli aralıklarla SaveChanges yapabilirsin.
+                    // burada her satır sonrası SaveChanges yapmıyoruz (personel için yaptık),
+                    // egitilenleri döngü sonunda kaydetmeyi tercih edebiliriz.
+                }
+
+                // döngü bittikten sonra tüm eklenen Egitilen kayıtlarını kaydet
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                result.Success = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, "Excel işleme sırasında hata oluştu.");
+                result.Success = false;
+                result.ErrorMessage = ex.Message;
+                return result;
+            }
+        }
+
 
 
 
